@@ -8,4 +8,16 @@ class User < ApplicationRecord
       new_user.oauth_token_secret   = auth_info.credentials.secret
     end
   end
+
+  private
+    def self.update_or_create(auth)
+      user = User.find_by(uid: auth[:uid]) || User.new
+      user.attributes = {
+        uid: auth[:extra][:raw_info][:user_id],
+        username: auth[:extra][:raw_info][:name],
+        oauth_token: auth[:credentials][:token],
+        oauth_token_secret: auth[:credentials][:secret]}
+      user.save!
+      user
+    end
 end

@@ -3,7 +3,7 @@ module RequestSpecHelper
     OmniAuth.config.test_mode = true
 
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-      provide: 'github',
+      provider: 'github',
       extra: {
         raw_info: {
           user_id: "1234",
