@@ -1,5 +1,7 @@
 {
   "name": "api_curious",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "basscss": "^8.0.2"
+  }
 }
