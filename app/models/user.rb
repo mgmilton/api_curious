@@ -16,8 +16,7 @@ class User < ApplicationRecord
       user.attributes = {
         uid: auth[:extra][:raw_info][:user_id],
         username: auth[:extra][:raw_info][:name],
-        oauth_token: auth[:credentials][:token],
-        oauth_token_secret: auth[:credentials][:secret]}
+        oauth_token: auth[:credentials][:token]}
       user.save!
       user
     end

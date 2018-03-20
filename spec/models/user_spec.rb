@@ -10,14 +10,12 @@ RSpec.describe User, type: :model do
             }
           },
           credentials: {
-            token: "pizza",
-            secret: "secretpizza"
+            token: "pizza"
           }}
     User.update_or_create(auth)
     new_user = User.first
     expect(new_user.uid).to eq("1234")
     expect(new_user.username).to eq("Hal")
     expect(new_user.oauth_token).to eq("pizza")
-    expect(new_user.oauth_token_secret).to eq("secretpizza")
   end
 end
