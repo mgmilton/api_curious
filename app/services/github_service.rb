@@ -1,7 +1,7 @@
 class GithubService
-  attr_reader :conn, :token
   def initialize(user)
     @token = user.oauth_token
+    @user = user
     @conn = Faraday.new(url: "https://api.github.com/") do |faraday|
       faraday.request :url_encoded
       faraday.adapter Faraday.default_adapter
@@ -10,12 +10,7 @@ class GithubService
   end
 
   def find_repos
-    response = @conn.get("/users/repo")
-    JSON.parse(response.body)
-  end
-
-  def get_url(url)
-    response = @conn.get(url)
-    JSON.parse(response.body, symbolize_names: true)[:results]
+    response = @conn.get("/users/#{@user.username}/repos")
+    JSON.parse(response.body, symbolize_names: true)
   end
 end
