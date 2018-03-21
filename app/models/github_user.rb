@@ -9,7 +9,7 @@ class GithubUser
               :public_repos_count,
               :followers_count,
               :following_count
-              
+
   def initialize(attributes)
     @username = attributes[:login]
     @name = attributes[:name]
@@ -22,5 +22,4 @@ class GithubUser
     @followers_count = attributes[:followers]
     @following_count = attributes[:following]
   end
-
 end
