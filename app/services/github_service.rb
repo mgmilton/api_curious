@@ -1,6 +1,5 @@
 class GithubService
   def initialize(user)
-    @token = user.oauth_token
     @user = user
   end
 
@@ -33,13 +32,13 @@ class GithubService
   end
 
   private
-    attr_reader :token, :user
+    attr_reader :user
 
     def conn
-      @conn = Faraday.new(url: "https://api.github.com/") do |faraday|
+      Faraday.new(url: "https://api.github.com/") do |faraday|
         faraday.request :url_encoded
         faraday.adapter Faraday.default_adapter
-        faraday.params[:access_token] = token
+        faraday.params[:access_token] = user.oauth_token
       end
     end
 
@@ -53,7 +52,7 @@ class GithubService
       num.times do
         i = 1
         response = @conn.get("/users/#{@user.username}/repos?page=#{1}&per_page=100")
-        JSON.parse(response.body, symbolize_names: true).map do |repo|
+        repos = JSON.parse(response.body, symbolize_names: true).map do |repo|
           Repository.new(repo)
         end
         i += 1

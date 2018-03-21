@@ -1,11 +1,11 @@
 class HomeController < ApplicationController
 
   def index
-    @user = current_user
+    @user = GithubPresenter.new(current_user)
   end
 
   def show
-    @user = current_user
+    @user = GithubPresenter.new(current_user)
   end
 
   def completeshow
