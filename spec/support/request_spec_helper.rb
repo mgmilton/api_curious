@@ -11,8 +11,7 @@ module RequestSpecHelper
         }
       },
       credentials: {
-        token: "pizza",
-        secret: "secretpizza"
+        token: "pizza"
       }
       })
   end
