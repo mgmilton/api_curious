@@ -9,6 +9,12 @@ class GithubService
     end
   end
 
+  def get_user_info
+    response = @conn.get("/users/#{@user.username}")
+    binding.pry
+    GithubUser.new(parse_json(response))
+  end
+
   def find_repos
     response = @conn.get("/users/#{@user.username}/repos?per_page=100")
     parse_json(response).map do |repo|
