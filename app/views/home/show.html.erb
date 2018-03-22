@@ -369,7 +369,8 @@
       <h3>Followers Recent Activity </h3>
       <ul>
         <% @user.followers_activity.each do |event| %>
-        <li class= "event"> <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
+        <li class= "event">
+          <%= event.actor[:login]%> completed a <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
         <% end %></br></br>
       </ul>
     </div>

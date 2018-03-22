@@ -39,7 +39,9 @@ class GithubService
   end
 
   def get_followers_events
-
+    get_followers.map do |follower|
+      get_recent_events(follower.username)
+    end.flatten
   end
 
   private
