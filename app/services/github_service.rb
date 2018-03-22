@@ -1,5 +1,5 @@
 class GithubService
-  
+
   def initialize(user)
     @user = user
   end
@@ -59,12 +59,12 @@ class GithubService
     attr_reader :user
 
     def conn
-      Faraday.new(url: "https://api.github.com/", headers: headers)
+      Faraday.new(url: "https://api.github.com/", :headers => headers)
     end
 
     def headers
       {
-        "authorization" => "token" + user.oauth_token
+        "authorization" => "token " + user.oauth_token
       }
     end
 
