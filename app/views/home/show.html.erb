@@ -365,11 +365,11 @@
     </div>
 
 
-    <div class="events">
+    <div class="follower_events">
       <h3>Followers Recent Activity </h3>
       <ul>
         <% @user.followers_activity.each do |event| %>
-        <li class= "event">
+        <li class= "follower_event">
           <%= event.actor[:login]%> completed a <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
         <% end %></br></br>
       </ul>
