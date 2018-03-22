@@ -34,7 +34,7 @@ class GithubService
 
   def get_recent_commits(username = user.username)
     dates = (Date.today - 14).strftime('%Y-%m-%d')
-    response = con.get do |req|
+    response = conn.get do |req|
       req.url "/search/commits?q=author-date:>#{dates} author:#{username}"
 
       req.headers['Accept'] = "application/vnd.github.cloak-preview+json"
