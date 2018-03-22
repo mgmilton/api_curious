@@ -9,6 +9,7 @@ class HomeController < ApplicationController
   end
 
   def completeshow
+    @user = GithubPresenter.new(current_user)
   end
 
 end
