@@ -1,4 +1,5 @@
 class GithubService
+  
   def initialize(user)
     @user = user
   end
@@ -58,11 +59,13 @@ class GithubService
     attr_reader :user
 
     def conn
-      Faraday.new(url: "https://api.github.com/") do |faraday|
-        faraday.request :url_encoded
-        faraday.adapter Faraday.default_adapter
-        faraday.params[:access_token] = user.oauth_token
-      end
+      Faraday.new(url: "https://api.github.com/", headers: headers)
+    end
+
+    def headers
+      {
+        "authorization" => "token" + user.oauth_token
+      }
     end
 
     def get_json(url)

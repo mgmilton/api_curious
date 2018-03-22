@@ -345,3 +345,14 @@
         </a>
       </nav>
     </div>
+
+    <div class="repos">
+      <h3> Repositories </h3>
+      <ul>
+        <% @user.repos.each do |repo| %>
+        <li> <%= repo.name %> </li>
+        <% end %>
+      </ul>
+
+  </body>
+</html>

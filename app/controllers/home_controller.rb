@@ -8,8 +8,4 @@ class HomeController < ApplicationController
     @user = GithubPresenter.new(current_user)
   end
 
-  def completeshow
-    @user = GithubPresenter.new(current_user)
-  end
-
 end
