@@ -19,7 +19,7 @@
 
   <meta name="viewport" content="width=device-width">
 
-  <title> <%= @user.user.username %> ( <%= @user.user.name %>)</title>
+  <title> <%= @user.get_user_info.username %> ( <%= @user.get_user_info.name %>)</title>
     <meta name="description" content="GitHub is where people build software. More than 27 million people use GitHub to discover, fork, and contribute to over 80 million projects.">
   <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="GitHub">
   <link rel="fluid-icon" href="https://github.com/fluidicon.png" title="GitHub">
@@ -208,7 +208,7 @@
 
       <ul class="dropdown-menu dropdown-menu-sw">
         <li class="dropdown-header header-nav-current-user css-truncate">
-          Signed in as <strong class="css-truncate-target"> <%= @user.user.username %></strong>
+          Signed in as <strong class="css-truncate-target"> <%= @user.get_user_info.username %></strong>
         </li>
 
         <li class="dropdown-divider"></li>
@@ -269,7 +269,7 @@
           <img class="rounded-1" src="https://avatars0.githubusercontent.com/u/7215067?s=64&amp;v=4" width="32" height="32" alt="@mgmilton">
         </span>
         <span class="d-table-cell v-align-middle lh-condensed js-user-profile-following-mini-toggle">
-          <strong><%= @user.user.username %></strong>
+          <strong><%= @user.get_user_info.username %></strong>
 
 
 
@@ -282,12 +282,12 @@
 
 <div class="vcard-names-container py-3 js-user-profile-sticky-fields is-placeholder" style="visibility: hidden; display: none; height: 86px;"></div><div class="vcard-names-container py-3 js-sticky js-user-profile-sticky-fields " style="position: static;">
   <h1 class="vcard-names">
-    <span class="p-name vcard-fullname d-block overflow-hidden" itemprop="name"><%= @user.user.name%></span>
-    <span class="p-nickname vcard-username d-block" itemprop="additionalName"><%= @user.user.username %></span>
+    <span class="p-name vcard-fullname d-block overflow-hidden" itemprop="name"><%= @user.get_user_info.name%></span>
+    <span class="p-nickname vcard-username d-block" itemprop="additionalName"><%= @user.get_user_info.username %></span>
   </h1>
 </div>
 
-  <div class="p-note user-profile-bio"><div><%= @user.user.bio %>
+  <div class="p-note user-profile-bio"><div><%= @user.get_user_info.bio %>
 </div></div>
 
 
@@ -297,10 +297,10 @@
 
 <ul class="vcard-details border-top border-gray-light py-3">
       <li itemprop="worksFor" show_title="false" aria-label="Organization" class="vcard-detail pt-1 css-truncate css-truncate-target"><svg class="octicon octicon-organization" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 12.999c0 .439-.45 1-1 1H7.995c-.539 0-.994-.447-.995-.999H1c-.54 0-1-.561-1-1 0-2.634 3-4 3-4s.229-.409 0-1c-.841-.621-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.442.58 2.5 3c.058 2.41-.159 2.379-1 3-.229.59 0 1 0 1s1.549.711 2.42 2.088C9.196 9.369 10 8.999 10 8.999s.229-.409 0-1c-.841-.62-1.058-.59-1-3 .058-2.419 1.367-3 2.5-3s2.437.581 2.495 3c.059 2.41-.158 2.38-1 3-.229.59 0 1 0 1s3.005 1.366 3.005 4"></path></svg>
-        <span class="p-org"><div><a class="user-mention" href="https://github.com/turingschool"><%= @user.user.company %></a></div></span>
+        <span class="p-org"><div><a class="user-mention" href="https://github.com/turingschool"><%= @user.get_user_info.company %></a></div></span>
 </li>
     <li itemprop="homeLocation" show_title="false" aria-label="Home location" class="vcard-detail pt-1 css-truncate css-truncate-target"><svg class="octicon octicon-location" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 0C2.69 0 0 2.5 0 5.5 0 10.02 6 16 6 16s6-5.98 6-10.5C12 2.5 9.31 0 6 0zm0 14.55C4.14 12.52 1 8.44 1 5.5 1 3.02 3.25 1 6 1c1.34 0 2.61.48 3.56 1.36.92.86 1.44 1.97 1.44 3.14 0 2.94-3.14 7.02-5 9.05zM8 5.5c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
-      <span class="p-label"><%= @user.user.location %></span>
+      <span class="p-label"><%= @user.get_user_info.location %></span>
 </li>
 
 
@@ -320,7 +320,7 @@
         <a href="/mgmilton?tab=repositories" class="UnderlineNav-item " aria-selected="false" role="tab" title="Repositories">
            Repositories
            <span class="Counter">
-             <%= @user.repos.count %>
+             <%= @user.find_repos.count %>
            </span>
         </a>
 
@@ -328,19 +328,19 @@
         <a href="/mgmilton?tab=stars" class="UnderlineNav-item " aria-selected="false" role="tab" title="Stars">
           Stars
           <span class="Counter">
-            <%= @user.starred.count %>
+            <%= @user.get_starred_repos.count %>
           </span>
         </a>
         <a href="/mgmilton?tab=followers" class="UnderlineNav-item " aria-selected="false" role="tab" title="Followers">
           Followers
           <span class="Counter">
-            <%= @user.followers.count %>
+            <%= @user.get_followers.count %>
           </span>
         </a>
         <a href="/mgmilton?tab=following" class="UnderlineNav-item " aria-selected="false" role="tab" title="Following">
           Following
           <span class="Counter">
-            <%= @user.following.count %>
+            <%= @user.get_following.count %>
           </span>
         </a>
       </nav>
@@ -349,7 +349,7 @@
     <div class="repos">
       <h3> Repositories </h3>
       <ul>
-        <% @user.repos.each do |repo| %>
+        <% @user.find_repos.each do |repo| %>
         <li class= "repo"> <%= repo.name %> </li>
         <% end %></br></br>
       </ul>
@@ -358,7 +358,7 @@
     <div class="events">
       <h3> Recent Activity </h3>
       <ul>
-        <% @user.activity.each do |event| %>
+        <% @user.get_recent_events.each do |event| %>
         <li class= "event"> <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
         <% end %></br></br>
       </ul>
@@ -368,7 +368,7 @@
     <div class="follower_events">
       <h3>Followers Recent Activity </h3>
       <ul>
-        <% @user.followers_activity.each do |event| %>
+        <% @user.get_followers_events.each do |event| %>
         <li class= "follower_event">
           <%= event.actor[:login]%> completed a <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
         <% end %></br></br>
