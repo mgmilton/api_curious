@@ -23,11 +23,11 @@ class GithubPresenter
     GithubService.new(@user).get_following
   end
 
-  def recent_commits
-    GithubService.new(@user).get_recent_commits
+  def activity
+    GithubService.new(@user).get_recent_events
   end
 
-  def followers_commits
-    GithubService.new(@user).get_followers_commits
+  def followers_activity
+    GithubService.new(@user).get_followers_events
   end
 end

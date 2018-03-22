@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.feature "user logs in" do
   scenario "using github oauth" do
-    VCR.use_cassette("user_logs_in_with_github") do
+    VCR.use_cassette("user_logs_in_with_github", :record => :new_episodes) do
       stub_omniauth
       visit "/"
 

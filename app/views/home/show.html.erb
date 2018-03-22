@@ -351,10 +351,28 @@
       <ul>
         <% @user.repos.each do |repo| %>
         <li class= "repo"> <%= repo.name %> </li>
-        <% end %>
+        <% end %></br></br>
       </ul>
     </div>
 
+    <div class="events">
+      <h3> Recent Activity </h3>
+      <ul>
+        <% @user.activity.each do |event| %>
+        <li class= "event"> <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
+        <% end %></br></br>
+      </ul>
+    </div>
+
+
+    <div class="events">
+      <h3>Followers Recent Activity </h3>
+      <ul>
+        <% @user.followers_activity.each do |event| %>
+        <li class= "event"> <%= event.type %>  on <%= event.repo[:name]%> at <%= event.created_at %> </li>
+        <% end %></br></br>
+      </ul>
+    </div>
 
   </body>
 </html>

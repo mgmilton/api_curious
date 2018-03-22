@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe GithubService do
   it "has a collection of github user data" do
-    VCR.use_cassette("github service") do
+    VCR.use_cassette("github service", :record => :new_episodes) do
       user = create(:user,
                     username: ENV['GITHUB_TEST_LOGIN'],
                     oauth_token: ENV['GITHUB_TEST_ACCESS_TOKEN'])
