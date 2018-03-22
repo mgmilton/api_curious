@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.feature "user logs in" do
   scenario "using github oauth" do
+    VCR.use_cassette("user_logs_in_with_github") do
       stub_omniauth
       visit "/"
 
@@ -9,10 +10,11 @@ RSpec.feature "user logs in" do
 
       click_link "Sign in with GitHub"
 
-      expect(page).to have_content("Hal")
-      expect(page).to have_content("Logout")
+      expect(page).to have_content("hal")
+      expect(page).to have_content("Log Out")
 
-      click_link "Logout"
+      click_link "Log Out"
       expect(page).to have_link("Sign in with GitHub")
     end
+  end
 end
