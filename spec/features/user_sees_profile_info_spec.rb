@@ -18,6 +18,9 @@ feature "User sees a profile information" do
         expect(page).to have_content("Developer in Training")
         expect(page).to have_content("Turingschool")
         expect(page).to have_content("Denver")
+        expect(page).to have_content("Stars 1")
+        expect(page).to have_content("Followers 5")
+        expect(page).to have_content("Following 5")
       end
     end
   end
