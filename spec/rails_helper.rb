@@ -7,6 +7,15 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require "vcr"
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/cassettes"
+  config.hook_into :webmock
+  config.filter_sensitive_data('<github_login>') {ENV["GITHUB_TEST_LOGIN"]}
+  config.filter_sensitive_data('<github_token>') {ENV["GITHUB_TEST_ACCESS_TOKEN"]}
+end
+
 # require 'factory_bot'
 # Add additional requires below this line. Rails is not loaded until this point!
 

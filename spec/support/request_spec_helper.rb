@@ -6,8 +6,8 @@ module RequestSpecHelper
       provider: 'github',
       extra: {
         raw_info: {
-          user_id: "1234",
-          name: "Hal",
+          uid: "1234",
+          login: "Hal",
         }
       },
       credentials: {
