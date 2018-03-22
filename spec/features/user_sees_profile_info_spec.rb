@@ -2,7 +2,7 @@ require "rails_helper"
 
 feature "User sees a profile information" do
   context "upon logging in and visiting show page" do
-    it "returns a user info" do
+    it "returns a users info" do
       user = create(:user,
                     username: ENV['GITHUB_TEST_LOGIN'],
                     oauth_token: ENV['GITHUB_TEST_ACCESS_TOKEN'])

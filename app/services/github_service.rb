@@ -4,7 +4,7 @@ class GithubService
     @user = user
   end
 
-  def get_user_info(login)
+  def get_user_info(login = user.username)
     GithubUser.new(get_json("/users/#{login}"))
   end
 
@@ -32,7 +32,7 @@ class GithubService
     end
   end
 
-  def get_recent_commits(username = user.login)
+  def get_recent_commits(username = user.username)
     dates = (Date.today - 14).strftime('%Y-%m-%d')
     response = con.get do |req|
       req.url "/search/commits?q=author-date:>#{dates} author:#{username}"
@@ -71,17 +71,5 @@ class GithubService
     def get_json(url)
       response = conn.get(url)
       JSON.parse(response.body, symbolize_names: true)
-    end
-
-    def all_repos
-      num = (126/ 100.0).ceil
-      num.times do
-        i = 1
-        response = @conn.get("/users/#{@user.username}/repos?page=#{1}&per_page=100")
-        repos = JSON.parse(response.body, symbolize_names: true).map do |repo|
-          Repository.new(repo)
-        end
-        i += 1
-      end
     end
 end
