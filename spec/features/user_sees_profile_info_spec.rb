@@ -2,14 +2,14 @@ require "rails_helper"
 
 feature "User sees a profile information" do
   context "upon logging in and visiting show page" do
-    it "returns a user info" do
+    it "returns a users info" do
       user = create(:user,
                     username: ENV['GITHUB_TEST_LOGIN'],
                     oauth_token: ENV['GITHUB_TEST_ACCESS_TOKEN'])
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      VCR.use_cassette("user_sees_info") do
+      VCR.use_cassette("user_sees_info", :record => :new_episodes) do
 
         visit '/show'
 

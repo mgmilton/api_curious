@@ -9,7 +9,7 @@ feature "User sees a list of repositories on her page" do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      VCR.use_cassette("user_sees_repos") do
+      VCR.use_cassette("user_sees_repos", :record => :new_episodes) do
 
         visit '/show'
 

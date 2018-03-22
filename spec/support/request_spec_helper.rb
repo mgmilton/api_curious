@@ -11,7 +11,7 @@ module RequestSpecHelper
         }
       },
       credentials: {
-        token: "pizza"
+        token: ENV['GITHUB_TEST_ACCESS_TOKEN']
       }
       })
   end

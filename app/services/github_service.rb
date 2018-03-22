@@ -4,7 +4,7 @@ class GithubService
     @user = user
   end
 
-  def get_user_info(login)
+  def get_user_info(login = user.username)
     GithubUser.new(get_json("/users/#{login}"))
   end
 
@@ -32,27 +32,16 @@ class GithubService
     end
   end
 
-  def get_recent_commits(username = user.login)
-    dates = (Date.today - 14).strftime('%Y-%m-%d')
-    response = con.get do |req|
-      req.url "/search/commits?q=author-date:>#{dates} author:#{username}"
-
-      req.headers['Accept'] = "application/vnd.github.cloak-preview+json"
+  def get_recent_events(username = user.username)
+    get_json("/users/#{username}/events").map do |event|
+      Event.new(event)
     end
-    response = JSON.parse(response.body, symbolize_names: true)
-    commits = []
-    20.times do |x|
-      commits << Commit.new(response[:items][:x][:repository][:name], response[:items][:x][:url])
-    end
-    commits
   end
 
-  def get_followers_commits
-    followers_commits = {}
-    self.get_followers.each do |follower|
-      followers_commits[follower] = get_recent_commits(follower.username)
-    end
-    followers_commits
+  def get_followers_events
+    get_followers.map do |follower|
+      get_recent_events(follower.username)
+    end.flatten
   end
 
   private
@@ -71,17 +60,5 @@ class GithubService
     def get_json(url)
       response = conn.get(url)
       JSON.parse(response.body, symbolize_names: true)
-    end
-
-    def all_repos
-      num = (126/ 100.0).ceil
-      num.times do
-        i = 1
-        response = @conn.get("/users/#{@user.username}/repos?page=#{1}&per_page=100")
-        repos = JSON.parse(response.body, symbolize_names: true).map do |repo|
-          Repository.new(repo)
-        end
-        i += 1
-      end
     end
 end
