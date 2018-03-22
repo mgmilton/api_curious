@@ -7,7 +7,7 @@ module RequestSpecHelper
       extra: {
         raw_info: {
           user_id: "1234",
-          name: "Hal",
+          login: "Hal",
         }
       },
       credentials: {

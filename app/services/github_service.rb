@@ -31,6 +31,29 @@ class GithubService
     end
   end
 
+  def get_recent_commits(username = user.login)
+    dates = (Date.today - 14).strftime('%Y-%m-%d')
+    response = con.get do |req|
+      req.url "/search/commits?q=author-date:>#{dates} author:#{username}"
+
+      req.headers['Accept'] = "application/vnd.github.cloak-preview+json"
+    end
+    response = JSON.parse(response.body, symbolize_names: true)
+    commits = []
+    20.times do |x|
+      commits << Commit.new(response[:items][:x][:repository][:name], response[:items][:x][:url])
+    end
+    commits
+  end
+
+  def get_followers_commits
+    followers_commits = {}
+    self.get_followers.each do |follower|
+      followers_commits[follower] = get_recent_commits(follower.username)
+    end
+    followers_commits
+  end
+
   private
     attr_reader :user
 
